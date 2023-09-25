@@ -1,116 +1,140 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const formulario = document.getElementById("miFormulario");
+const formulario = document.getElementById("miFormulario");
 
-  // Objeto servicios de limpieza
-  const serviciosLimpieza = {
-    limpieza1: {
-      id: 1,
-      nombre: "colchon 1 plaza",
-      precio: 6000,
-      aDomicilio: true,
-    },
-    limpieza2: {
-      id: 2,
-      nombre: "colchon 2 plazas",
-      precio: 8500,
-      aDomicilio: true,
-    },
-    limpieza3: {
-      id: 3,
-      nombre: "sillon 2 cuerpos",
-      precio: 8000,
-      aDomicilio: true,
-    },
-    limpieza4: {
-      id: 4,
-      nombre: "sillon 3 cuerpos",
-      precio: 11000,
-      aDomicilio: true,
-    },
-    limpieza5: {
-      id: 5,
-      nombre: "Vehiculo 5 asientos",
-      precio: 9500,
-      aDomicilio: false,
-    },
-    limpieza6: {
-      id: 6,
-      nombre: "Vehiculo 7 asientos",
-      precio: 1200,
-      aDomicilio: false,
-    },
+// Objeto  servicios de limpieza
+const serviciosLimpieza = {
+  limpieza1: {
+    id: 1,
+    nombre: "colchon 1 plaza",
+    precio: 6000,
+    aDomicilio: true,
+  },
+  limpieza2: {
+    id: 2,
+    nombre: "colchon 2 plazas",
+    precio: 8500,
+    aDomicilio: true,
+  },
+  limpieza3: {
+    id: 3,
+    nombre: "sillon 2 cuerpos",
+    precio: 8000,
+    aDomicilio: true,
+  },
+  limpieza4: {
+    id: 4,
+    nombre: "siilon 3 cuerpos",
+    precio: 11000,
+    aDomicilio: true,
+  },
+  limpieza5: {
+    id: 5,
+    nombre: "Vehiculo 5 asientos",
+    precio: 9500,
+    aDomicilio: false,
+  },
+  limpieza6: {
+    id: "6",
+    nombre: "Vehiculo 7 asientos",
+    precio: 1200,
+    aDomicilio: false,
+  },
+};
+
+formulario.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const nombre = document.getElementById("nombre").value;
+  const domicilio = document.getElementById("domicilio").value;
+  const telefono = document.getElementById("telefono").value;
+  const email = document.getElementById("email").value;
+  const servicio = document.getElementById("servicio").value;
+
+  if (!nombre || !domicilio || !telefono || !email) {
+    alert("Por favor, complete todos los campos y seleccione una cantidad.");
+    return;
+  }
+
+  if (!serviciosLimpieza[servicio]) {
+    alert("Por favor, seleccione un servicio válido.");
+    return;
+  }
+
+  // Validacion del campo numero de teléfono
+  if (!/^\d+$/.test(telefono)) {
+    return;
+  }
+  if (nombre.length < 4) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "El nombre de usuario es muy corto. Indentifiquese con nombre completo.",
+    });
+    return;
+  }
+  if (domicilio.length < 15) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Por favor, sea mas especifico al escribir su direccion.",
+    });
+    return;
+  }
+  if (telefono.length !== 10) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Por favor, verifique su numero de telefono. Solo puede colocar numero celular con el numero de area.",
+    });
+    return;
+  }
+  if (email.length > 100) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Por favor, verifique la longitud de los email.",
+    });
+    return;
+  }
+
+  // un objeto con los dats
+  const datos = {
+    nombre: nombre,
+    domicilio: domicilio,
+    telefono: telefono,
+    email: email,
+    servicio: servicio,
+    mostrados: false,
   };
 
-  formulario.addEventListener("submit", function (e) {
-    e.preventDefault();
+  // guardar datos en LocalStorage
+  localStorage.setItem("datosUsuario", JSON.stringify(datos));
 
-    const nombre = document.getElementById("nombre").value;
-    const domicilio = document.getElementById("domicilio").value;
-    const telefono = document.getElementById("telefono").value;
-    const email = document.getElementById("email").value;
+  alert("Datos guardados correctamente en LocalStorage.");
 
-    // Validacion del campo numero de teléfono
-    if (!/^\d+$/.test(telefono)) {
-      alert("El número de teléfono debe contener solo números.");
-      return;
-    }
+  // Limpiar el formulario
+  formulario.submit();
+});
 
-    if (
-      nombre.length > 50 ||
-      domicilio.length > 100 ||
-      telefono.length !== 10 ||
-      email.length > 100
-    ) {
-      alert("Por favor, verifique la longitud de los campos.");
-      return;
-    }
+// Obtener los datos almacenados en LocalStorage
+const datosGuardados = JSON.parse(localStorage.getItem("datosUsuario"));
 
-    const servicio = document.getElementById("servicio").value;
+// Obtener el elemento HTML donde se muestran los datos
+const datosMostrados = document.getElementById("datosMostrados");
 
-    // objeto con los datos
-    const datos = {
-      nombre: nombre,
-      domicilio: domicilio,
-      telefono: telefono,
-      email: email,
-      servicio: servicio,
-    };
-
-    // Guardar datos en LocalStorage
-    localStorage.setItem("datosUsuario", JSON.stringify(datos));
-
-    // Limpiar el formulario
-    formulario.reset();
-
-    // mensaje en el elemento HTML
-    const datosMostrados = document.getElementById("datosMostrados");
-    const mensaje = `
-        <h2>Datos ingresados por el usuario:</h2>
-        <p><strong>Nombre:</strong> ${datos.nombre}</p>
-        <p><strong>Dirección:</strong> ${datos.domicilio}</p>
-        <p><strong>Teléfono:</strong> ${datos.telefono}</p>
-        <p><strong>Email:</strong> ${datos.email}</p>
-        <p><strong>Servicio elegido:</strong> ${datos.servicio}</p>
-    `;
-
-    datosMostrados.innerHTML = mensaje;
-  });
-
-  // obtener los datos almacenados en LocalStorage
-  const datosGuardados = JSON.parse(localStorage.getItem("datosUsuario"));
-
-  // Verificar si hay datos guardados y mostrarlos al cargar la página
-  if (datosGuardados) {
-    const datosMostrados = document.getElementById("datosMostrados");
-    const mensaje = `
+// Verificar si hay datos guardados
+if (datosGuardados && !datosGuardados.mostrados) {
+  const datos = { mostrados: true };
+  localStorage.setItem("datosUsuario", JSON.stringify(datos));
+  //mensaje para mostrar los datos
+  const mensaje = `
         <h2>Datos ingresados por el usuario:</h2>
         <p><strong>Nombre:</strong> ${datosGuardados.nombre}</p>
         <p><strong>Dirección:</strong> ${datosGuardados.domicilio}</p>
         <p><strong>Teléfono:</strong> ${datosGuardados.telefono}</p>
         <p><strong>Email:</strong> ${datosGuardados.email}</p>
         <p><strong>Servicio elegido:</strong> ${datosGuardados.servicio}</p>
-    `;
+      `;
 
-    datosMostrados.innerHTML = mensaje;
-  }
-});
+  // Mostrar el mensaje en el elemento HTML
+  datosMostrados.innerHTML = mensaje;
+}
