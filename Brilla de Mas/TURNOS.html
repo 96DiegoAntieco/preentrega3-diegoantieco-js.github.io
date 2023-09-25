@@ -102,23 +102,25 @@
                         <option value="limpieza1">colchon 1 plaza</option>
                         <option value="limpieza2">colchon 2 plazas</option>
                         <option value="limpieza3">sillon 2 cuerpos</option>
-                        <option value="limpieza4">siilon 3 cuerpos</option>
+                        <option value="limpieza4">sillon 3 cuerpos</option>
                         <option value="limpieza5">Vehiculo 5 asientos</option>
                         <option value="limpieza6">Vehiculo 7 asientos</option>
                     </select>
                     <br>
-                    <button type="submit">Enviar</button>
+                    <button type="submit" id="enviar">Enviar</button>
                 </form>
-
-
-
-
-
             </div>
         </div>
 
-        <!-- elemento div para mostrar los datos ingresados -->
-        <div id="datosMostrados"></div>
+
+        <!-- Elemento HTML para mostrar los datos ingresados -->
+        <div id="datosMostrados" class="fila"></div>
+
+
+
+
+
+
 
         <!-- Footer -->
         <footer class=" row bg-dark text-center text-white">
@@ -286,7 +288,10 @@
     </div>
 
     <!-- JAVA SCRIPT -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="Entrega3.js"></script>
+    <!-- JAVA SCRIPT -->
+
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
