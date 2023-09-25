@@ -8,13 +8,13 @@ const serviciosLimpieza = {
     precio: 6000,
     aDomicilio: true,
   },
-  colchonplazas: {
+  colchon2plazas: {
     id: 2,
     nombre: "colchon 2 plazas",
     precio: 8500,
     aDomicilio: true,
   },
-  lsillon2cuerpos: {
+  sillon2cuerpos: {
     id: 3,
     nombre: "sillon 2 cuerpos",
     precio: 8000,
