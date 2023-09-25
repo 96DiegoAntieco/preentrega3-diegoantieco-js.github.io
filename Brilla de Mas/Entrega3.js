@@ -2,37 +2,37 @@ const formulario = document.getElementById("miFormulario");
 
 // Objeto  servicios de limpieza
 const serviciosLimpieza = {
-  limpieza1: {
+  colchon1plaza: {
     id: 1,
     nombre: "colchon 1 plaza",
     precio: 6000,
     aDomicilio: true,
   },
-  limpieza2: {
+  colchonplazas: {
     id: 2,
     nombre: "colchon 2 plazas",
     precio: 8500,
     aDomicilio: true,
   },
-  limpieza3: {
+  lsillon2cuerpos: {
     id: 3,
     nombre: "sillon 2 cuerpos",
     precio: 8000,
     aDomicilio: true,
   },
-  limpieza4: {
+  sillon3cuerpos: {
     id: 4,
     nombre: "siilon 3 cuerpos",
     precio: 11000,
     aDomicilio: true,
   },
-  limpieza5: {
+  vehiculo5asientos: {
     id: 5,
     nombre: "Vehiculo 5 asientos",
     precio: 9500,
     aDomicilio: false,
   },
-  limpieza6: {
+  vehiculo7asientos: {
     id: "6",
     nombre: "Vehiculo 7 asientos",
     precio: 1200,
